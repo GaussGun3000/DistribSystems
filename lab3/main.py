@@ -1,10 +1,18 @@
 from flask import Flask, jsonify, request, render_template_string
 import htmls
+import json
 app = Flask(__name__)
+import os
 
-# Пример списка слов для автодополнения
-WORDS = ["apple", "banana", "grape", "orange", "mango", "lemon", "banena"]
 
+try:
+    if 'lab3' not in os.getcwd():
+        os.chdir('lab3')
+    with open("words.json", "r") as file:
+        WORDS = json.load(file)
+except FileNotFoundError:
+    print("Файл words.json не найден.")
+    WORDS = []
 
 @app.route('/autocomplete', methods=['GET'])
 def autocomplete():
