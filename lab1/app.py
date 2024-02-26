@@ -8,6 +8,7 @@ app = Flask(__name__)
 def index():
     return render_template_string(index_html)
 
+
 @app.route('/input', methods=['GET', 'POST'])
 def form():
     if request.method == 'POST':
