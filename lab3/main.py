@@ -12,7 +12,7 @@ try:
         WORDS = json.load(file)
 except FileNotFoundError:
     print("Файл words.json не найден.")
-    WORDS = []
+    exit(-1)
 
 @app.route('/autocomplete', methods=['GET'])
 def autocomplete():
