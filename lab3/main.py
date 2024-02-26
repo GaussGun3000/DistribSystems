@@ -13,13 +13,12 @@ except FileNotFoundError:
     print("Файл words.json не найден.")
     exit(-1)
 
+
 def select_top_three_suggestions(suggestions):
-    # Сначала сортируем по длине слова
     sorted_by_length = sorted(suggestions, key=lambda x: len(x))
-    # Если есть одинаковые по длине слова, сортируем их по алфавиту
     sorted_alphabetically = sorted(sorted_by_length, key=lambda x: (len(x), x))
-    # Возвращаем только первые три слова (если есть)
     return sorted_alphabetically[:3]
+
 
 @app.route('/autocomplete', methods=['GET'])
 def autocomplete():
@@ -33,12 +32,11 @@ def autocomplete():
 def index():
     return render_template_string(htmls.AUTOCOMPLETE)
 
+
 @app.route('/allwords', methods=['GET'])
 def allwords():
     # Simply return all WORDS in JSON format
     return jsonify(WORDS)
-
-
 
 
 if __name__ == '__main__':
