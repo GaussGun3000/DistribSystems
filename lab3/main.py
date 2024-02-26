@@ -1,6 +1,17 @@
 from flask import Flask, jsonify, request, render_template_string
 import htmls
+import json
 app = Flask(__name__)
+import os
+
+try:
+    if 'lab3' not in os.getcwd():
+        os.chdir('lab3')
+    with open("words.json", "r") as file:
+        WORDS = json.load(file)
+except FileNotFoundError:
+    print("Файл words.json не найден.")
+    exit(-1)
 
 def select_top_three_suggestions(suggestions):
     # Сначала сортируем по длине слова
@@ -9,9 +20,6 @@ def select_top_three_suggestions(suggestions):
     sorted_alphabetically = sorted(sorted_by_length, key=lambda x: (len(x), x))
     # Возвращаем только первые три слова (если есть)
     return sorted_alphabetically[:3]
-
-# Пример списка слов для автодополнения
-WORDS = ["apple", "banana", "grape", "orange", "mango", "lemon", "banena", "baka", "balalaika"]
 
 @app.route('/autocomplete', methods=['GET'])
 def autocomplete():
