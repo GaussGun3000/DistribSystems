@@ -33,6 +33,13 @@ def autocomplete():
 def index():
     return render_template_string(htmls.AUTOCOMPLETE)
 
+@app.route('/allwords', methods=['GET'])
+def allwords():
+    # Simply return all WORDS in JSON format
+    return jsonify(WORDS)
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,4 +1,4 @@
-AUTOCOMPLETE = ''' <!DOCTYPE html>
+AUTOCOMPLETE = '''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,11 +19,31 @@ AUTOCOMPLETE = ''' <!DOCTYPE html>
                 $('#suggestions').empty();
             }
         });
+
+        $("#toggleAllWords").click(function(){
+            var allWordsDiv = $("#allWords");
+            if(allWordsDiv.is(":visible")){
+                allWordsDiv.hide();
+                $("#separator").hide(); // Скрываем разделительную черту
+            } else {
+                allWordsDiv.empty(); // Очищаем текущий список
+                $.getJSON("/allwords", function(data){
+                    $.each(data, function(key, value){
+                        allWordsDiv.append('<div>' + value + '</div>');
+                    });
+                });
+                allWordsDiv.show();
+                $("#separator").show(); // Показываем разделительную черту
+            }
+        });
     });
     </script>
 </head>
 <body>
     <input type="text" id="autocomplete" placeholder="Start typing...">
+    <button id="toggleAllWords">Toggle All Words</button>
     <div id="suggestions"></div>
+    <hr id="separator" style="display:none;"> <!-- Изначально скрытая черта -->
+    <div id="allWords" style="display:none;"></div> <!-- Изначально скрытый список -->
 </body>
 </html> '''
