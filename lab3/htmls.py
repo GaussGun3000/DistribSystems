@@ -7,6 +7,7 @@ AUTOCOMPLETE = '''<!DOCTYPE html>
     <script src="{{ url_for('static', filename='autocomplete.js') }}"></script>
 </head>
 <body>
+    <h2>Поиск с дополнением</h2>
     <input type="text" id="autocomplete" placeholder="Start typing...">
     <button id="toggleAllWords">Toggle All Words</button>
     <div id="suggestions"></div>

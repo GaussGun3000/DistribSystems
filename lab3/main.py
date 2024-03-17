@@ -22,7 +22,7 @@ def select_top_three_suggestions(suggestions):
 
 @app.route('/autocomplete', methods=['GET'])
 def autocomplete():
-    search = request.args.get('term')
+    search = request.args.get('term').lower()
     suggestions = [word for word in WORDS if word.startswith(search)] if search else []
     top_three_suggestions = select_top_three_suggestions(suggestions)
     return jsonify(top_three_suggestions)
